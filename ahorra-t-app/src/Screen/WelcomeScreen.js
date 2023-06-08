@@ -1,15 +1,29 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
 import StyledText from '../components/StyledText'
 import Constants from 'expo-constants'
+import { TouchableOpacity } from 'react-native';
+import LogoScreen from './LogoScreen';
 
 
 // create a component
 const WelcomeScreen = () => {
     return (
         <View style={styles.container} >
-            <Image source={require('../img/Ahorrate-01.png')} style={styles.logo}/>
-            <StyledText fontWeight='bold' color='secondary'>AhorraT tiempo, AhorraT esfuerzo, AhorraT excusas.</StyledText>
-            <StyledText fontWeight='bold' color='secondary'>Empieza tu ahorro ya!</StyledText>
+            <View>
+                <LogoScreen/>
+                <View>
+                    <StyledText align='center' color='secondary' fontWeight='bold'>Si ya tienes Inicia Sesión</StyledText>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.buttonText}>Iniciar sesión</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <StyledText align='center' color='secondary' fontWeight='bold'>Aún no tienes cuenta? haz clic y registrate!</StyledText>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.buttonText}>Registrarme</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </View>
     );
 };
@@ -19,15 +33,27 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         padding: 20,
         paddingVertical: 20,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
 
-    logo: {
+    button: {
+        backgroundColor: '#789DCA',
+        borderRadius: 40,
+        paddingVertical: 10,
+        paddingHorizontal: 15,
         width: '100%',
-        height: '50%',
-        borderRadius: 4 
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: '3%',
+        marginBottom: '10%',
     },
-  });
+
+    buttonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+});
 
 
 //make this component available to the app
