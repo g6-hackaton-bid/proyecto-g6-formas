@@ -12,7 +12,7 @@ const WelcomeScreen = () => {
             <View>
                 <LogoScreen/>
                 <View>
-                    <StyledText align='center' color='secondary' fontWeight='bold'>Si ya tienes Inicia Sesión</StyledText>
+                    <StyledText align='center' color='secondary' fontWeight='bold'>Si ya tienes cuenta Inicia Sesión</StyledText>
                     <TouchableOpacity style={styles.button}>
                         <Text style={styles.buttonText}>Iniciar sesión</Text>
                     </TouchableOpacity>
