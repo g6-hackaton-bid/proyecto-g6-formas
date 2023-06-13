@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { TextPropTypes, StyleSheet, Text } from "react-native"; 
 import theme from '../theme.js'
 
