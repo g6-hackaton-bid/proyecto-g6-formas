@@ -1,51 +1,86 @@
-import {View, Text, StyleSheet} from 'react-native';
-import StyledText from '../components/StyledText';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 
-    
-const LogIn = () => {
-    return(
-        <View style={styles.container} >
-             <Text style={{ textAlign: "center"}} fontWeight='italic' color='secondary'>Unete Ahorra.</Text>
-            <Text style={{ textAlign: "center"}} fontWeight='italic' color='secondary'>Crea una cuenta donde empezar a conocer{'\n'}sobre educación financiera{'\n'}además tendras acceso a una cuenta{'\n'}bancaria y otros beneficios!</Text>
+// create a component
+const LogIn = (props) => {
+    const[email, setEmail] = useState("");
+    const[clave, setClave] = useState("");
+
+    const {setToken, setIsLogin, setLocalId} = props.p;
+
+    const handleInicioSesion = () =>{
+        const apiKey = "AIzaSyAWxbAWbcRTIl_hm3pX5FoHQl4tuJxuuJw";
+        const URL = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + apiKey;
+
+        const datos = {email: email, password: clave, returnSecureToken: true };
+        const options = {
+            method: 'POST',
+            header: {
+                'Acept' : 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body : JSON.stringify(datos),
+        }
+        //hacer peticiones con fetch
+        fetch(URL, options)
+        .then(response => response.json())
+        .then(result => {
+            const rs = result.idToken;
+            if(rs!=null){
+                setToken(result.idToken);
+                setLocalId(result.localId);
+                setIsLogin(true);
+            } 
+            else{
+                alert("Error de usuario o contraseña");
+            }          
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title} >Iniciar Sesión</Text>
+            <TextInput style={styles.input} placeholder='Email' onChangeText={(txt)=>setEmail(txt)}/>
+            <TextInput style={styles.input} placeholder='Contraseña' onChangeText={(txt)=>setClave(txt)} secureTextEntry={true}/>
             
-            <View>
-            <StyledText align='center' color='secondary' fontWeight='bold'>Vamos a empezar</StyledText>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Empezar</Text>
-                    </TouchableOpacity>
-            </View>
-            <StyledText align='center' color='secondary' fontWeight='bold'>¿Ya tienes Cuenta?</StyledText>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Long in</Text>
-                    </TouchableOpacity>
-            <View>
-
-            </View>
+            <TouchableOpacity style={styles.button} onPress={handleInicioSesion}>
+                <Text style={styles.buttonText}>Iniciar sesión</Text>
+            </TouchableOpacity>
         </View>
-
-        
     );
 };
 
+// define your styles
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "white",
-        padding: 20,
-        paddingVertical: 90,
         justifyContent: 'center',
+        alignItems: 'center',
+        width: 300,
+        borderRadius: 15,
+        marginTop:'50%'
     },
 
+    input: {
+        borderWidth: 1,
+        borderColor: '#ddd',
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        borderRadius: 5,
+        marginBottom: 10,
+        width: '100%',
+      },
+
     button: {
-        backgroundColor: '#789DCA',
-        borderRadius: 40,
+        backgroundColor: '#007bff',
+        borderRadius: 5,
         paddingVertical: 10,
         paddingHorizontal: 15,
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '3%',
-        marginBottom: '10%',
     },
 
     buttonText: {
@@ -53,9 +88,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
     },
+
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
 });
 
-export default LogIn;
-
-
-    
+//make this component available to the app
+export {LogIn};
