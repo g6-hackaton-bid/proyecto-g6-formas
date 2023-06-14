@@ -1,6 +1,6 @@
 import { View, StyledText, StyleSheet, Image } from 'react-native';
-import StyledText from '../components/StyledText'
-import Constants from 'expo-constants'
+import StyledText from '../components/StyledText';
+import Constants from 'expo-constants';
 
 const LogoScreen = () => {
     return (
