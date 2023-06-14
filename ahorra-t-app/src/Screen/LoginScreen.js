@@ -6,7 +6,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const LoginScreen = () => {
     return (
         <View style={styles.container}>
-            <Text>Este sería el Login</Text>
+            <Text>MyComponent</Text>
         </View>
     );
 };
