@@ -1,9 +1,9 @@
 import {View, Text, StyleSheet} from 'react-native';
-import StyledText from '../components/StyledText'
+import StyledText from '../components/StyledText';
 import { TouchableOpacity } from 'react-native';
 
     
-const Longin = () => {
+const LogIn = () => {
     return(
         <View style={styles.container} >
              <Text style={{ textAlign: "center"}} fontWeight='italic' color='secondary'>Unete Ahorra.</Text>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "white",
         padding: 20,
-        paddingVertical: 20,
+        paddingVertical: 90,
         justifyContent: 'center',
     },
 
@@ -54,6 +54,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 });
+
+export default LogIn;
 
 
     

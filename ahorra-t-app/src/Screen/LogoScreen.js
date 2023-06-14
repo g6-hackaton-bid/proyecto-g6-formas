@@ -1,4 +1,4 @@
-import { View, StyledText, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import StyledText from '../components/StyledText';
 import Constants from 'expo-constants';
 
